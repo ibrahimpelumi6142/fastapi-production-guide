@@ -1,0 +1,13 @@
+[Unit]
+Description=FastAPI Gunicorn Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/fastapi-production-guide
+Environment="PATH=/opt/fastapi-production-guide/venv/bin"
+ExecStart=/opt/fastapi-production-guide/venv/bin/gunicorn -k uvicorn.workers.UvicornWorker app.main:app --bind 127.0.0.1:8000 --workers 3
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
